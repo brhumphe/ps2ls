@@ -271,6 +271,7 @@ namespace ps2ls.Forms
             exportOptions.Textures = texturesCheckBox.Checked;
             exportOptions.UpAxis = (Axes)upAxisComboBox.SelectedIndex;
             exportOptions.TextureFormat = (TextureExporter.TextureFormatInfo)textureFormatComboBox.SelectedItem;
+            exportOptions.ExportFormatInfo = (ModelExporterStatic.ExportFormatInfo)modelFormatComboBox.SelectedItem;
         }
 
         private void textureFormatComboBox_SelectedIndexChanged(object sender, EventArgs e)

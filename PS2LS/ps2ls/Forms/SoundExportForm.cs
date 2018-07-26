@@ -21,7 +21,7 @@ namespace ps2ls.Forms
 
         public List<String> FileNames { get; set; }
 
-        private GenericLoadingForm loadingForm;
+        //private GenericLoadingForm loadingForm;
         private BackgroundWorker exportBackgroundWorker = new BackgroundWorker();
 
         private FMOD.FILE_OPENCALLBACK myopen = new FMOD.FILE_OPENCALLBACK(OPENCALLBACK);

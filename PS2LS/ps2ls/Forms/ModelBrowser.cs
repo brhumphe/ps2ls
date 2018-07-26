@@ -290,7 +290,7 @@ void main()
             if (showAxesButton.Checked)
             {
                 // debug axes
-                GL.Begin(BeginMode.Lines);
+                GL.Begin(PrimitiveType.Lines);
                 //x
                 GL.Color3(Color.Red);
                 GL.Vertex3(Vector3.Zero);
@@ -435,7 +435,7 @@ void main()
                     GCHandle indexDataHandle = GCHandle.Alloc(mesh.IndexData, GCHandleType.Pinned);
                     IntPtr indexData = indexDataHandle.AddrOfPinnedObject();
 
-                    GL.DrawElements(BeginMode.Triangles, (Int32)mesh.IndexCount, DrawElementsType.UnsignedShort, indexData);
+                    GL.DrawElements(PrimitiveType.Triangles, (Int32)mesh.IndexCount, DrawElementsType.UnsignedShort, indexData);
 
                     indexDataHandle.Free();
 
@@ -636,8 +636,8 @@ void main()
                     materialSelectionComboBox.Items.Add(textureName);
                 }
                 currentShader = texturedShader;
+                materialSelectionComboBox.SelectedIndex = 0;
             }
-            materialSelectionComboBox.SelectedIndex = 0;
 
 
             snapCameraToModel();
