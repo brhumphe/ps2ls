@@ -357,8 +357,16 @@ void main()
                     }
 
                     //fetch material definition and vertex layout
-                    MaterialDefinition materialDefinition = MaterialDefinitionManager.Instance.MaterialDefinitions[model.Materials[(Int32)mesh.MaterialIndex].MaterialDefinitionHash];
-                    VertexLayout vertexLayout = MaterialDefinitionManager.Instance.VertexLayouts[materialDefinition.DrawStyles[0].VertexLayoutNameHash];
+                    Int32 materialIndex = (Int32)mesh.MaterialIndex;
+                    uint materialDefinitionHash = model.Materials[materialIndex].MaterialDefinitionHash;
+                    MaterialDefinition materialDefinition = null;
+                    VertexLayout vertexLayout = null;
+
+                    if(MaterialDefinitionManager.Instance.MaterialDefinitions.ContainsKey(materialDefinitionHash))
+                    {
+                        materialDefinition = MaterialDefinitionManager.Instance.MaterialDefinitions[materialDefinitionHash];
+                        vertexLayout = MaterialDefinitionManager.Instance.VertexLayouts[materialDefinition.DrawStyles[0].VertexLayoutNameHash];
+                    }
 
                     GL.Color3(meshColors[i % meshColors.Length]);
 
@@ -375,7 +383,7 @@ void main()
                     VertexLayout.Entry.DataTypes positionDataType = VertexLayout.Entry.DataTypes.None;
                     Int32 positionStream = 0;
                     Int32 positionOffset = 0;
-                    bool positionExists = vertexLayout.GetEntryInfoFromDataUsageAndUsageIndex(VertexLayout.Entry.DataUsages.Position, 0, out positionDataType, out positionStream, out positionOffset);
+                    bool positionExists = (vertexLayout != null ? vertexLayout.GetEntryInfoFromDataUsageAndUsageIndex(VertexLayout.Entry.DataUsages.Position, 0, out positionDataType, out positionStream, out positionOffset) : false);
 
                     if (positionExists)
                     {
@@ -389,7 +397,7 @@ void main()
                     VertexLayout.Entry.DataTypes normalDataType = VertexLayout.Entry.DataTypes.None;
                     Int32 normalStream = 0;
                     Int32 normalOffset = 0;
-                    bool normalExists = vertexLayout.GetEntryInfoFromDataUsageAndUsageIndex(VertexLayout.Entry.DataUsages.Normal, 0, out normalDataType, out normalStream, out normalOffset);
+                    bool normalExists = (vertexLayout != null ? vertexLayout.GetEntryInfoFromDataUsageAndUsageIndex(VertexLayout.Entry.DataUsages.Normal, 0, out normalDataType, out normalStream, out normalOffset) : false);
 
                     if (normalExists)
                     {
@@ -404,7 +412,7 @@ void main()
                     VertexLayout.Entry.DataTypes texCoord0DataType = VertexLayout.Entry.DataTypes.None;
                     Int32 texCoord0Stream = 0;
                     Int32 texCoord0Offset = 0;
-                    bool texCoord0Exists = vertexLayout.GetEntryInfoFromDataUsageAndUsageIndex(VertexLayout.Entry.DataUsages.Texcoord, 0, out texCoord0DataType, out texCoord0Stream, out texCoord0Offset);
+                    bool texCoord0Exists = (vertexLayout != null ? vertexLayout.GetEntryInfoFromDataUsageAndUsageIndex(VertexLayout.Entry.DataUsages.Texcoord, 0, out texCoord0DataType, out texCoord0Stream, out texCoord0Offset) : false);
 
                     if (texCoord0Exists)
                     {
