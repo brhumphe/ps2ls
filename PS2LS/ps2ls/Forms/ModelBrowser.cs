@@ -328,7 +328,7 @@ void main()
                 GL.Enable(EnableCap.CullFace);
                 GL.Enable(EnableCap.Texture2D);
                 GL.Enable(EnableCap.Blend);
-                GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+                GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
                 GL.CullFace(CullFaceMode.Back);
                 GL.FrontFace(FrontFaceDirection.Cw);
 
